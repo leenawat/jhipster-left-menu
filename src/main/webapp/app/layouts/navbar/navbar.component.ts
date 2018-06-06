@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    @Input() leftMenuHidden: boolean;
+    @Output() toggleBtnLeftMenuEvent= new EventEmitter<boolean>();
 
     constructor(
         private loginService: LoginService,
@@ -32,12 +34,16 @@ export class NavbarComponent implements OnInit {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
-
     ngOnInit() {
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+    }
+
+    toggleLeftMenu() {
+        this.leftMenuHidden = !this.leftMenuHidden;
+        this.toggleBtnLeftMenuEvent.emit(this.leftMenuHidden);
     }
 
     collapseNavbar() {

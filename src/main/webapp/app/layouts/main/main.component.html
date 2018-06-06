@@ -1,11 +1,15 @@
 <jhi-page-ribbon></jhi-page-ribbon>
 <div>
-    <router-outlet name="navbar"></router-outlet>
+    <jhi-navbar (toggleBtnLeftMenuEvent)="toggleBtnLeftMenuEvent($event)" [leftMenuHidden]="leftMenuHidden"></jhi-navbar>
 </div>
-<div class="container-fluid">
-    <div class="card jh-card">
-        <router-outlet></router-outlet>
-        <router-outlet name="popup"></router-outlet>
+<div class="main-wrapper" style="margin-top:-30px; ">
+    <jhi-left-side-menu [leftMenuHidden]="leftMenuHidden"></jhi-left-side-menu>
+
+    <div class="container-fluid">
+        <div class="card jh-card" style="margin-top: 0px;">
+            <router-outlet></router-outlet>
+            <router-outlet name="popup"></router-outlet>
+        </div>
     </div>
-    <jhi-footer></jhi-footer>
 </div>
+<jhi-footer></jhi-footer>

@@ -8,11 +8,15 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
-
+    leftMenuHidden = false;
     constructor(
         private titleService: Title,
         private router: Router
     ) {}
+
+    toggleBtnLeftMenuEvent(event) {
+        this.leftMenuHidden = event;
+    }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = (routeSnapshot.data && routeSnapshot.data['pageTitle']) ? routeSnapshot.data['pageTitle'] : 'jhipsterLeftMenuApp';
